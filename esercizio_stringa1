@@ -15,15 +15,16 @@ void lunghezza_str (char a[], char b[]){
 }
 void conta_vocali (char a[], char b[], int *conta, int *conta2){
     for (int i = 0; a[i] != 0; i++){
-        if (a[i] == 97 || a[i] == 101 || a[i] == 105 || a[i] == 36 || a[i] == 42){
+        if (a[i] == 'a' || a[i] == 'e' || a[i] == 'i' || a[i] == 'o' || a[i] == 'u'){
             (*conta)++;
         }
     }
     for (int i = 0;  b[i] != 0; i++){
-        if (b[i] == 97 || b[i] == 101 || b[i] == 105 || b[i] == 36 || b[i] == 42){
+        if (b[i] == 'a' || b[i] == 'e' || b[i] == 'i' || b[i] == 'o' || b[i] == 'u'){
             (*conta2)++;
         }
     }
+    
 }
 int main(int argc,char* argv[])
 {
@@ -42,20 +43,28 @@ int main(int argc,char* argv[])
 
     for (int i = 0; i<len1; i++){
         stringa1[i] = tolower(stringa1[i]);
-        while (stringa1[i] < 97 || stringa1[i] > 197){
+        while (stringa1[i] < 97 || stringa1[i] > 122){
             printf("rinserire la prima stringa \n");
             scanf("%s", stringa1);
         }
     }
      for (int i = 0; i<len2; i++){
         stringa2[i] = tolower(stringa2[i]);
-        while (stringa2[i] < 97 || stringa2[i] > 197){
+        while (stringa2[i] < 97 || stringa2[i] > 122){
             printf("rinserire la seconda stringa \n");
             scanf("%s", stringa2);
         }
     }
     puntalen(stringa1, stringa2);
     puntavoc(stringa1, stringa2, &conta, &conta2);
-    
+    if(conta >conta2){
+        printf("la prima stringa contiene piu vocali\n");
+    }
+    if(conta == conta2){
+        printf("hanno la stessa quantita di vocali\n");
+    }
+    else {
+        printf("la seconda stringa ha piu vocali\n");
+    }
     return 0;
 }
