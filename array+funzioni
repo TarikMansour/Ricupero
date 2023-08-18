@@ -1,0 +1,44 @@
+#include <stdio.h>
+void increase(int prodottiQ, float prodotti[prodottiQ],float incremento, float totInc[prodottiQ]){
+    for (int i = 0; i<prodottiQ; i++){
+       *(totInc + i) = *(prodotti + i) * incremento;
+       *(totInc + i) += *(prodotti + i); 
+    }
+}
+float total (int prodottiQ, float totInc[prodottiQ]){
+    float totale = 0;
+    for (int i = 0; i<prodottiQ; i++){
+        totale += totInc[i];
+    }
+    return totale;
+}
+float media(int prodottiQ, float totInc[prodottiQ]){
+    float media = 0, totale = 0;
+    for (int i = 0; i<prodottiQ; i++){
+      totale += totInc[i];
+      media = totale/prodottiQ;
+    }
+    return media;
+}
+int main (int argc, char*argv[]){
+    int prodottiQ;
+   
+    float prezzo, incremento;
+    printf("quanti prodotti ci sono?\n");
+    scanf("%d", &prodottiQ);
+    float prodotti[prodottiQ], totInc[prodottiQ];
+    for (int i = 0; i<prodottiQ; i++){
+        printf("inserire il prezzo dei prodotti\n");
+        scanf("%f", &prodotti[i]);
+    }
+    printf("scegli l'incremento\n");
+    scanf("%f", &incremento);
+    increase(prodottiQ, prodotti,incremento, totInc);
+    for (int i = 0; i<prodottiQ; i++){
+       printf("%f \n", totInc[i]);
+    }
+    printf("il totale: %f\n",total(prodottiQ, totInc));
+    printf("la media: %f",media(prodottiQ, totInc));
+    
+    return 0;
+}
