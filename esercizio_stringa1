@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-void lunghezza_str (char a[], char b[]){
+void lunghezza_str (char a[], char b[], int *conta, int *conta2){
     if (strlen(a) > strlen(b)){
         printf("la prima stringa risulta piu lunga\n");
     }
@@ -25,36 +25,43 @@ void conta_vocali (char a[], char b[], int *conta, int *conta2){
         }
     }
 }
-void elimina_carattere (char a[], char b[]){
+void elimina_carattere (char a[], char b[], int *conta, int *conta2){
     char carattere;
     printf("inserire un carattere per eliminare\n");
     scanf("%s", &carattere);
     for (int i = 0; a[i] != 0; i++){
         if (a[i] == carattere){
-            a[i] = a[i+1];
+            if (i != strlen(a)-1){
+                for(int j=i; j<strlen(a); j++){
+                    a[j] = a[j+1];
+                }
+            }
             i--;
         }
     }
     for (int i = 0; b[i] != 0; i++){
         if (b[i] == carattere){
-            b[i] = b[i+1];
-            i--;
+           if (i != strlen(b)-1){
+                for(int j=i; j<strlen(b); j++){
+                    b[j] = b[j+1];
+                }
+            }   i--;
         }
     }
+    printf("le nuove stringhe sono %s e %s \n", a, b);
 }   
 int main(int argc,char* argv[])
 {
     char stringa1[20];
     char stringa2[20];
     int conta = 0, conta2 = 0;
+    int scelta;
     printf("inserire due stringhe\n");
     scanf("%s%s", stringa1, stringa2);
-    void (*puntalen)(char[], char[]);
-    void (*puntavoc)(char[], char[], int*, int*);
-    void (*puntachar)(char[], char[]);
-    puntalen = &lunghezza_str;
-    puntavoc = &conta_vocali;
-    puntachar = &elimina_carattere;
+    void (*punta_funzione[3])(char a[], char b[], int *conta, int *conta2);
+    punta_funzione[0] = lunghezza_str;
+    punta_funzione[1] = conta_vocali;
+    punta_funzione[2] = elimina_carattere;
     int len1 = strlen(stringa1);
     int len2 = strlen(stringa2);
 
@@ -72,19 +79,19 @@ int main(int argc,char* argv[])
             scanf("%s", stringa2);
         }
     }
-    
-    puntachar(stringa1, stringa2);
-    printf("le nuove stringhe sono %s e %s \n", stringa1, stringa2);
-    puntalen(stringa1, stringa2);
-    puntavoc(stringa1, stringa2, &conta, &conta2);
+    printf("0 per verificare lunghezza,1 per contare vocali e 2 per eliminare carattere\n");
+    scanf("%d", &scelta);
+    punta_funzione[scelta](stringa1,stringa2, &conta, &conta2);
+    if (scelta == 1){
     if(conta >conta2){
-        printf("la prima stringa contiene piu vocali\n");
-    }
-    if(conta == conta2){
-        printf("hanno la stessa quantita di vocali\n");
-    }
-    else {
-        printf("la seconda stringa ha piu vocali\n");
+            printf("la prima stringa contiene piu vocali\n");
+        }
+        if(conta == conta2){
+            printf("hanno la stessa quantita di vocali\n");
+        }
+        else {
+            printf("la seconda stringa ha piu vocali\n");
+        }
     }
     return 0;
 }
