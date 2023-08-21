@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+void stampa(int argc, char*argv[]){
+   for (int i = 1; i<argc; i++){
+       printf("%s", *(argv + i));
+   } 
+}
+
+void stampa_back (int argc, char*argv[]){
+    printf ("\n array inverso:\n");
+    for (int i = argc-1; i>=0; i--){
+        printf("%s", *(argv + i));
+    }
+}
+void minmax (int argc, char*argv[]){
+    int max = atoi(argv[1]);
+    int min = atoi(argv[1]);
+    for (int i = 1; i<argc; i++){
+        int numero = atoi(argv[i]);
+        if(numero > max){
+            max = atoi(*(argv + i));
+        }
+        else if (numero<min){
+            min = atoi(*(argv + i));
+        }
+    }
+     printf("il massimo: %d e il minimo: %d\n", max, min);
+}
+int main (int argc, char*argv[]){
+   
+    if (argc < 2){
+        printf("numero argomenti sbagliato\n");
+        return -1;
+    }
+    minmax(argc, argv);
+    stampa(argc, argv);
+    stampa_back(argc, argv);
+    return 0;
+}
