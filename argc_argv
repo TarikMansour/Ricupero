@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+int massimo(int argc, char*argv[]){
+    int posizione = 0, max = atoi(argv[1]);
+    for (int i = 2; i<argc; i++){
+        int n = atoi(argv[i]);
+        if (n > max){
+            max = n;
+            posizione = i;
+        }
+    }
+    return posizione;
+}
+void conta_pari (int argc, char*argv[], int pari[], int *counter){
+    int pos = 0;
+    for(int i = 2; i<argc; i++){
+         int n = atoi(argv[i]);
+        if (n %2== 0){
+           pari[pos] = n;
+           (*counter)++;
+           pos++;
+           n /= 2;
+        }
+    }
+}
+int main (int argc, char*argv[]){
+    int counter = 0;
+    int pari[argc];
+    if (argc < 2){
+        printf("numero argomenti sbagliato");
+        return -1;
+    }
+    int posizione = massimo(argc, argv);
+    conta_pari(argc, argv,pari,&counter);
+    printf("il numero massimo inserito: %d\n", atoi(argv[posizione]));
+    printf("numeri pari:");
+    for (int i = 0; i<counter; i++){
+        printf(" %d", pari[i]);
+    }
+    return 0;
+}
