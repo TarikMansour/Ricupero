@@ -62,9 +62,14 @@ void sommaMedia(int n, int a[], int scelta){
      for(int i = 0; i<n; i++){
         somma += a[i];
     }
-    media = somma/n;
+    media = (somma)/n;
     printf("somma dei numeri: %d", somma);
     printf("media dei numeri: %f", media);
+}
+void invertire(int n, int a[], int scelta){
+    for(int i=n-1; i>=0; i--){
+        printf("%d", a[i]);
+    }
 }
 int main()
 {
@@ -76,17 +81,17 @@ int main()
         printf("inserire il %d numero \n", i+1);
         scanf("%d", &a[i]);
     }
-    void (*punta_funzioni[6])(int n, int a[],int b);
+    void (*punta_funzioni[7])(int n, int a[],int b);
    punta_funzioni[0] = stampa;
    punta_funzioni[1] = ricerca;
    punta_funzioni[2] = elimina;
    punta_funzioni[3] = pari;
    punta_funzioni[4] = dispari;
    punta_funzioni[5] = sommaMedia;
-   printf("\n 0 per stampare \n 1 per ricercare \n 2 per eliminare \n 3 per stampare i numeri pari \n 4 per stampare i numeri dispari \n 5 per stampare la somma e media dei numeri \n");
+   punta_funzioni[6] = invertire;
+   printf("\n 0 per stampare \n 1 per ricercare \n 2 per eliminare \n 3 per stampare i numeri pari \n 4 per stampare i numeri dispari \n 5 per stampare la somma e media dei numeri \n 6 per invertire l'array");
    scanf("%d\n", &scelta);
    if(scelta == 1 || scelta == 2){
-       printf("inserire il numero \n");
        scanf("%d", &b);
    }
    punta_funzioni[scelta](n,a,b);
