@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+void VerificaLettere(char a[]){
+    for(int i = 0; i<strlen(a); i++){
+        a[i] = tolower(a[i]);
+        if !(a[i] > 96 || a[i] < 123){
+            printf("stringa invalida\n");
+        }
+    }
+}
+void ContaLettere(char a[], char b){
+    int j = 0;
+    for(int i = 0; i<strlen(a); i++){
+        if(a[i] == b){
+            j++;
+        }
+    }
+    printf("il carattere %c è presente %d volte", b, j);
+}
+void ContaDoppie(char a[]){
+    for(int i = 0; i<strlen(a); i++){
+        if(a[i] == a[i+1]){
+            printf("ci sono doppie\n");
+        }
+    }
+}
+int main(){
+    char stringa[20];
+    
+    return 0;
+}
