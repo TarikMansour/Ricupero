@@ -1,18 +1,17 @@
 #include <stdio.h>
 #include <string.h>
-void VerificaLettere(char a[]){
+void VerificaLettere(char a[], char b[], int *conta, int *conta2){
     for(int i = 0; i<strlen(a); i++){
         a[i] = tolower(a[i]);
-        if !(a[i] > 96 || a[i] < 123){
+        if (a[i] < 97 || a[i] > 122){
             printf("stringa invalida\n");
         }
     }
 }
-void ContaLettere(char a[], char b){
-    int j = 0;
+void ContaLettere(char a[], char b[], int *conta, int *conta2){
     for(int i = 0; i<strlen(a); i++){
         if(a[i] == b){
-            j++;
+            *(conta)++;
         }
     }
     printf("il carattere %c è presente %d volte", b, j);
@@ -24,8 +23,36 @@ void ContaDoppie(char a[]){
         }
     }
 }
+void MisuraStringhe(char a[], char b[], int *conta, int *conta2){
+    int len = strlen(char a[]);
+    int len2 = strlen(char b[]);
+    if(len > len2){
+        printf("la stringa %s è piu lunga", a);
+    }
+    else if (len2 > len){
+         printf("la stringa %s è piu lunga", b);
+    }
+    else{
+        printf("le stringhe hanno la stessa lunghezza");
+    }
+}
+void conta_vocali (char a[], char b[], int *conta, int *conta2){
+    for (int i = 0; a[i] != 0; i++){
+        if (a[i] == 'a' || a[i] == 'e' || a[i] == 'i' || a[i] == 'o' || a[i] == 'u'){
+            (*conta)++;
+        }
+    }
+    for (int i = 0;  b[i] != 0; i++){
+        if (b[i] == 'a' || b[i] == 'e' || b[i] == 'i' || b[i] == 'o' || b[i] == 'u'){
+            (*conta2)++;
+        }
+    }
+}
+void conta_consonanti(char a[], char b[], int *conta, int *conta2){
+    
+}
 int main(){
     char stringa[20];
-    
+    int conta = 0, conta2 = 0;
     return 0;
 }
