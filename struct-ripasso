@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX 3
+typedef struct {
+    int anno_immatricolazione;
+    int cilindrata;
+    double prezzo;
+    char marca[20];
+    char modelloAuto[20];
+}Auto;
+void VisualizzaPrezzo (Auto veicoli[MAX], double prezzo){
+    int found = 0;
+     for(int i = 0; i<MAX; i++){
+        if(veicoli[i].prezzo == prezzo){
+            printf("Veicolo ricercato: %s %s\n", veicoli[i].marca, veicoli[i].modelloAuto);
+            found = 1;
+        }
+    }
+    if(!found){
+        printf("Veicolo non trovato\n");
+    }
+}
+void VisualizzaCosto (Auto veicoli[MAX]){
+    Auto maxVeicolo = veicoli[0];
+    Auto minVeicolo = veicoli[0];
+     for(int i = 0; i<MAX; i++){
+        if(veicoli[i].prezzo > maxVeicolo.prezzo){
+            maxVeicolo = veicoli[i];
+        }
+        if(veicoli[i].prezzo < minVeicolo.prezzo){
+            minVeicolo = veicoli[i];
+        }
+    }
+    printf("Il veicolo con il prezzo più alto è: %s (Prezzo: %.2f)\n", maxVeicolo.modelloAuto, maxVeicolo.prezzo);
+    printf("Il veicolo con il prezzo più basso è: %s (Prezzo: %.2f)\n", minVeicolo.modelloAuto, minVeicolo.prezzo);
+}
+void ordinaPerAnno(Auto veicoli[MAX]) {
+    Auto temp;
+    for (int i = 0; i < MAX - 1; i++) {
+        for (int j = 0; j < MAX - i - 1; j++) {
+            if (veicoli[j].anno_immatricolazione > veicoli[j + 1].anno_immatricolazione) {
+                temp = veicoli[j];
+                veicoli[j] = veicoli[j + 1];
+                veicoli[j + 1] = temp;
+            }
+        }
+    }
+    for (int i = 0; i < MAX; i++) {
+        printf("%s %s, Anno: %d, Prezzo: %.2f\n", veicoli[i].marca, veicoli[i].modelloAuto, veicoli[i].anno_immatricolazione, veicoli[i].prezzo);
+    }
+}
+int main() {
+    Auto veicoli[MAX];
+    double prezzo;
+    int scelta;
+    veicoli[0].anno_immatricolazione = 2004;
+    veicoli[0].cilindrata = 1500;
+    veicoli[0].prezzo = 4567;
+    strcpy(veicoli[0].marca, "Audi");
+    strcpy(veicoli[0].modelloAuto, "Q3");
+    veicoli[1].anno_immatricolazione = 1969;
+    veicoli[1].cilindrata = 2500;
+    veicoli[1].prezzo = 5678;
+    strcpy(veicoli[1].marca, "Ford"); 
+    strcpy(veicoli[1].modelloAuto, "Mustang");
+    veicoli[2].anno_immatricolazione = 2013;
+    veicoli[2].cilindrata = 3500;
+    veicoli[2].prezzo = 9876;
+    strcpy(veicoli[2].marca, "Ferrari"); 
+    strcpy(veicoli[2].modelloAuto, "F8");
+    printf("\n 0 per ricercare partendo dal prezzo \n 1 per visualizzare l'auto piu economica e quella piu costosa \n 3 per visualizzare la lista in base gli anni di immatricolazione \n");
+    scanf("%d", &scelta);
+    if(scelta == 0){
+         printf("Inserire prezzo dell'auto da ricercare \n");
+        scanf("%lf", &prezzo);
+        VisualizzaPrezzo(veicoli, prezzo);
+    }
+    else if (scelta == 2){
+        VisualizzaCosto(veicoli);
+    }
+    else if(scelta == 3){
+        ordinaPerAnno(veicoli);
+    }
+    
+    return 0;
+}
+
